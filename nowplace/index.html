@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7041c5">
+  <title>NowPlace | Viva o agora</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="#">
+      <span class="logo-icon">N</span>
+      <span>NowPlace</span>
+    </a>
+    <span class="top-label">O mundo acontece agora.</span>
+  </header>
+
+  <main class="container">
+    <section class="welcome">
+      <span class="eyebrow">SEU MOMENTO, SEU LUGAR</span>
+      <h1>Onde você está <span>agora?</span></h1>
+      <p>Registre seu momento e descubra o que acontece ao seu redor.</p>
+    </section>
+
+    <section class="panel" id="create-section">
+      <div class="section-heading">
+        <div>
+          <span class="step-label">01 · NOVA PUBLICAÇÃO</span>
+          <h2>Compartilhe seu Now</h2>
+        </div>
+        <span class="heading-icon">✦</span>
+      </div>
+
+      <form id="now-form">
+        <label for="username">Seu nome</label>
+        <input id="username" maxlength="40" required
+          placeholder="Como você quer ser identificado?">
+
+        <label for="activity">O que você está fazendo?</label>
+        <textarea id="activity" maxlength="240" required
+          placeholder="Conte um pouco sobre seu momento..."
+          rows="3"></textarea>
+
+        <div class="camera-heading">
+          <div>
+            <label>Registre suas duas fotos</label>
+            <p class="helper">Primeiro o ambiente, depois sua selfie.</p>
+          </div>
+          <span id="camera-status" class="status">Aguardando</span>
+        </div>
+
+        <div class="camera-box">
+          <video id="camera" autoplay playsinline muted></video>
+          <canvas id="capture-canvas" hidden></canvas>
+          <div id="camera-placeholder" class="camera-placeholder">
+            <span class="camera-icon">◎</span>
+            <strong>Sua câmera aparecerá aqui</strong>
+            <span>Permita o acesso à câmera quando solicitado.</span>
+          </div>
+          <span id="capture-stage" class="camera-badge">Nenhuma captura</span>
+        </div>
+
+        <div class="camera-actions">
+          <button type="button" id="start-camera" class="button button-primary">
+            Abrir câmera
+          </button>
+          <button type="button" id="capture-photo" class="button button-dark" disabled>
+            Capturar ambiente
+          </button>
+          <button type="button" id="stop-camera" class="button button-light" disabled>
+            Encerrar câmera
+          </button>
+        </div>
+
+        <div class="photo-grid">
+          <div class="photo-preview">
+            <span>FOTO 1 · AMBIENTE</span>
+            <img id="environment-preview" alt="Prévia da foto do ambiente">
+            <p id="environment-empty">Aguardando foto do ambiente</p>
+          </div>
+          <div class="photo-preview">
+            <span>FOTO 2 · SELFIE</span>
+            <img id="selfie-preview" alt="Prévia da selfie">
+            <p id="selfie-empty">Aguardando selfie</p>
+          </div>
+        </div>
+
+        <div class="location-box">
+          <span class="location-icon">⌖</span>
+          <div>
+            <strong>Localização do dispositivo</strong>
+            <p id="location-status" aria-live="polite">
+              A localização será solicitada na publicação.
+            </p>
+          </div>
+          <button type="button" id="get-location" class="text-button">
+            Obter GPS
+          </button>
+        </div>
+
+        <button type="submit" id="publish-now" class="button button-primary publish-button">
+          Publicar meu Now
+        </button>
+        <p id="form-message" class="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel feed-panel" id="feed-section">
+      <div class="section-heading">
+        <div>
+          <span class="step-label">02 · EXPLORAR</span>
+          <h2>Nows por perto</h2>
+          <p class="helper">Descubra momentos compartilhados na região.</p>
+        </div>
+        <span class="feed-symbol">⌖</span>
+      </div>
+
+      <div class="feed-controls">
+        <div class="radius-control">
+          <label for="radius">Raio de busca</label>
+          <select id="radius">
+            <option value="1">1 km</option>
+            <option value="5" selected>5 km</option>
+            <option value="10">10 km</option>
+            <option value="25">25 km</option>
+            <option value="50">50 km</option>
+          </select>
+        </div>
+        <button id="search-nearby" class="button button-primary" type="button">
+          Buscar Nows
+        </button>
+      </div>
+
+      <div class="feed-gate" id="feed-gate">
+        <span class="gate-icon">✦</span>
+        <h3>O agora começa com você</h3>
+        <p>Registre um Now nas últimas 24 horas para liberar a consulta do feed.</p>
+      </div>
+
+      <div id="feed-message" class="message" role="status" aria-live="polite"></div>
+      <div id="feed-list" class="feed-list"></div>
+    </section>
+
+    <section class="panel saved-panel">
+      <div class="section-heading">
+        <div>
+          <span class="step-label">03 · SEUS REGISTROS</span>
+          <h2>Seus Nows neste dispositivo</h2>
+        </div>
+      </div>
+      <p class="helper">
+        Registros locais não são publicações no servidor. Eles servem para
+        preservar suas capturas neste navegador até a integração com a API.
+      </p>
+      <div id="saved-list" class="saved-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="logo footer-logo">NowPlace</span>
+    <p>Descubra lugares. Viva o momento.</p>
+  </footer>
+</body>
+</html>
